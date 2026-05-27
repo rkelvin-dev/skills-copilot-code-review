@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const uiConfig = {
+    announcementText:
+      "📢 As inscrições para atividades estão abertas até o final do mês. Não perca sua vaga!",
+  };
+
   // DOM elements
+  const announcementBanner = document.getElementById("announcement-banner");
   const activitiesList = document.getElementById("activities-list");
   const messageDiv = document.getElementById("message");
   const registrationModal = document.getElementById("registration-modal");
@@ -900,6 +906,16 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Initialize app
+  if (announcementBanner) {
+    // Separate emoji and text for accessibility
+    const emoji = document.createElement("span");
+    emoji.textContent = "📢 ";
+    emoji.setAttribute("aria-hidden", "true");
+    announcementBanner.innerHTML = "";
+    announcementBanner.appendChild(emoji);
+    announcementBanner.appendChild(document.createTextNode(uiConfig.announcementText.replace(/^📢\s*/, "")));
+  }
+
   checkAuthentication();
   initializeFilters();
   fetchActivities();
